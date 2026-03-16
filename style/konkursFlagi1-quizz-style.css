@@ -1,0 +1,159 @@
+main.quizz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    background-color: #144379;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 60rem;
+    max-width: 95%;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+}
+
+#question-number {
+    font-size: 1.8rem;
+}
+
+#flag-container {
+    margin-bottom: 2rem;
+}
+
+#flag-container img {
+    width: 12rem;
+    height: auto;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+
+#answer-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#answer-input-container input {
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    border: none;
+    width: 50%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#submit-answer {
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #1d61af;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit-answer:hover {
+    background-color: #0251ac;
+}
+
+#result-message {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    min-height: 2rem;
+}
+
+#quiz-summary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.75);
+    z-index: 999;
+    color: white;
+    text-align: center;
+}
+
+.summary-circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: conic-gradient(#1d61af 0deg, #444 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.summary-circle::before {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: #111;
+    border-radius: 50%;
+}
+
+#summary-score {
+    position: relative;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+}
+
+#restart-btn {
+    padding: 12px 28px;
+    margin: 7px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #1d61af;
+    color: white;
+    transition: 0.25s;
+}
+
+#restart-btn:hover {
+    background-color: #0251ac;
+    transform: scale(1.05);
+}
+
+#back-to-main-page-btn {
+    padding: 12px 28px;
+    margin: 7px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #1d61af;
+    color: white;
+    transition: 0.25s;
+}
+
+#back-to-main-page-btn:hover {
+    background-color: #0251ac;
+    transform: scale(1.05);
+}
+
+
+#timer {
+    font-size: 1.5rem;
+    margin: 10px;
+    font-weight: bold;
+}

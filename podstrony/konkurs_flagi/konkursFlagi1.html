@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="KsaweryW_MichałT_IgorK">
+        <link rel="stylesheet" href="../../style/styles.css">
+        <link rel="stylesheet" href="../../style/konkursFlagi1-style.css">
+        <script defer src="../../js/zmiana-ustawien.js"></script>
+        <title>ZSŁ-Quizziz</title>
+</head>
+<body>
+    <div class="layout">
+        <header>
+            ZSŁ-Quizziz
+        </header>
+            
+        <nav id="menuGorne">
+             <a href="../../index.html">Strona główna</a>
+        </nav>
+                
+        <main class="quizz">
+            <h1>Etap 1</h1>
+            <h2>Witaj w 1 etapie konkursu flagowego! <br>Nauczysz sie w nim flag wszystkich państw oraz, jeśli czujesz się na siłach, terytoriów zależnych.</h2>
+
+            <div id="okno-ustawien">
+                <div id="przyciski-ustawien">
+                    <div id="przyciski-ustawien2">
+                        <button id="powrot-button">Powrót</button>
+                        <button id="zakres-button">Zakres</button>
+                        <button id="czas-button">Czas</button>
+                        <button id="ilosc-button">Ilość</button>
+                    </div>
+                </div>
+                <div id="slajdy-ustawien">
+
+                    <div class="ust" id="slide1">
+                        <button id="ust-konkurs" data-text="ust-konkurs">Ustawienia konkursowe</button>
+                        <button id="ust-wlasne" data-text="ust-wlasne">Ustawienia własne</button>
+                    </div>
+
+                    <div class="zakres" id="slide2">
+                        <button id="zakres-panstwa" name = "panstwa" data-text="Ilość państw &lpar;max. 197&rpar;: " data-ilosc="197">Państwa</button>
+                        <button id="zakres-terytoria" name="terytoria" data-text="Ilość terytoriów zależnych &lpar;max. 51&rpar;: " data-ilosc="51">Terytoria zależne</button>
+                        <button id="zakres-all" name = "wszystkie" data-text="Ilość &lpar;max. 248&rpar;: " data-ilosc="248">Wszystkie &lpar;Państwa + Terytoria zależne&rpar;</button>
+                    </div>
+
+                    <div class="czas" id="slide3">
+                        <div id="czas-tak-nie">
+                            <label>Czas na odpowiedź:</label>
+                            <button class="toggle-button"><div id="circle"></div></button>
+                        </div>
+                        <div id = "czas-na-flage-inp">
+                            <label>Czas na jedną flagę:</label>
+                            <input type="number" min="1">
+                            <label>s</label>
+                        </div>
+                       
+                    </div>
+
+                    <div class="ilosc" id="slide4">
+                        <label>Ilość &lpar;max. 251&rpar;: </label>
+                        <input typ="number" min="1">
+                    </div>
+
+                </div>
+
+                <div id = "start">
+                    <button id = "start-button">Rozpocznij Quizz</button>
+                </div>
+
+            </div>
+        </main>
+                
+        <footer>
+            ® Prawa Zastrzeżone dla projektu ZSŁ-Quizziz
+        </footer>
+    </div>
+</body>
+</html>

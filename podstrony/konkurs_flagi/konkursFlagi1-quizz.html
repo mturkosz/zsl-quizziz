@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="KsaweryW_MichałT_IgorK">
+        <link rel="stylesheet" href="../../style/styles.css">
+        <link rel="stylesheet" href="../../style/konkursFlagi1-style.css">
+        <link rel="stylesheet" href="../../style/konkursFlagi1-quizz-style.css">
+        <script defer src="../../js/konkursFlagi1-quizz.js"></script>
+        <title>ZSŁ-Quizziz</title>
+</head>
+<body>
+    <script defer src="../../js/odczyt-ustawien.js"></script>
+    <div class="layout">
+        <header>
+            ZSŁ-Quizziz
+        </header>
+            
+        <nav id="menuGorne">
+             <a href="../../index.html">Strona główna</a>
+        </nav>
+                
+        <main class="quizz">
+            <div id="quiz-container">
+                <div id="question-number">Pytanie 1</div>
+                <div id="timer"></div>
+                <div id="flag-container">
+                    <img src="" alt="Flaga" id="flag-img">
+                </div>
+                <div id="answer-input-container">
+                    <input type="text" id="answer-input" placeholder="Wpisz nazwę" autocomplete="off">
+                    <button id="submit-answer">Sprawdź</button>
+                </div>
+                <div id="result-message"></div>
+            </div>
+
+            <div id="quiz-summary" style="display:none;">
+                <div class="summary-circle">
+                    <span id="summary-score"></span>
+                </div>
+                <button id="restart-btn">Zagraj ponownie</button>
+                <button id="back-to-main-page-btn">Powrót do strony głównej</button>
+            </div>
+        </main>
+                
+        <footer>
+            ® Prawa Zastrzeżone dla projektu ZSŁ-Quizziz
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.quizz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    text-align: center; 
+    height: 80vh;
+    font-size: 2vw;
+}
+
+@media (max-width: 768px) {
+    .quizz {
+        font-size: 4vw;
+        height: 80vh;
+    }
+}

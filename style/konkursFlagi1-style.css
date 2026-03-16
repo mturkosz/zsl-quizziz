@@ -1,0 +1,282 @@
+main{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 40px;
+}
+h2{
+    font-size: 35px;  
+}
+
+#okno-ustawien{
+    display: flex;
+    flex-direction: column;
+    background-color: #144379;
+    font-size: 20px;
+    width: 60rem;
+    height: 12rem;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+#przyciski-ustawien{
+    display: flex;
+    justify-content: center;
+    width: 20rem;
+    height: 2.4rem;
+}
+
+#przyciski-ustawien button{
+    background-color: #1d61af;
+    color: white;
+    margin: 4px;
+    width: 6rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#przyciski-ustawien2{
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    display: flex;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#przyciski-ustawien2.on{
+    opacity: 1;
+    pointer-events: all;
+}
+
+#przyciski-ustawien button:hover{
+    background-color: #0251ac;
+}
+
+#slajdy-ustawien{
+    display: flex;
+    width: 60rem;
+    height: fit-content;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+
+#slajdy-ustawien>div{
+    width: 60rem;
+    height: 7rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+#slide1{
+    background-color: #213664;
+    height: 100%;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+#slide2{
+    background-color: rgb(206, 194, 194);
+    height: 100%;
+    width: 100%;
+}
+
+#slide3{
+    background-color: rgb(206, 194, 194);
+    height: 100%;
+    width: 100%;
+}
+#slide4{
+    background-color: rgb(206, 194, 194);
+}
+
+
+.toggle-button{
+    background-color: rgb(246, 64, 76);
+    margin: 4px;
+    width: 4rem;
+    height: 2rem;
+    display: flex;
+    border-radius: 50px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.czas #circle{
+    background-color: white;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    transition: left 0.5s ease-in-out;
+}
+
+#circle.on{
+    left: 2.3rem;
+}
+
+.toggle-button.on{
+    background-color: rgb(0, 211, 0);
+}
+
+.czas{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#czas-tak-nie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+#start{
+    display: flex;
+    justify-content: center;
+    width: 20rem;
+    height: 2.4rem;
+}
+
+#start-button{
+    background-color: #1d61af;
+    color: white;
+    margin: 4px;
+    width: 12rem;
+    height: 2rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-button.active{
+    display: flex;
+}
+
+#start-button:hover{
+    background-color: #0251ac;
+}
+
+.zakres{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.ust{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zakres button{
+    background-color: #539ff7;
+    color: white;
+    margin: 4px;
+    width: 8rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zakres button:hover{
+    background-color: #1481ff;
+}
+
+.zakres button.active{
+    background-color: #1263c0;
+}
+
+
+.ilosc{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.ilosc input{
+    margin: 1vh;
+    width: 10%;
+    background-color: rgb(163, 155, 155);
+    border-radius: 1vh;
+    padding: 0.85vh;
+    font-size: 2vh;
+}
+
+#czas-na-flage-inp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+
+#czas-na-flage-inp.active{
+    position: static;
+    opacity: 1;
+}
+
+#czas-na-flage-inp input{
+    margin: 1vh;
+    width: 10%;
+    background-color: rgb(163, 155, 155);
+    border-radius: 1vh;
+    padding: 0.85vh;
+    font-size: 2vh;
+}
+
+.ust button{
+    background-color: #62abff;
+    color: white;
+    margin: 6px;
+    width: 8rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ust button:hover{
+    background-color: #1481ff;
+}
+
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+@media (max-width: 768px) {
+    main {
+        overflow-x: hidden;
+    }
+    .zakres button{
+        height: 90%;
+    }
+}

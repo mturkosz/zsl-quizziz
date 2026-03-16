@@ -1,0 +1,119 @@
+
+@font-face {
+  font-family: "InclusiveSans";
+  src: url("./files/webfonts/InclusiveSans-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*{
+    box-sizing: border-box;
+    
+}
+html, body{
+    margin: 0 auto;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    color: aliceblue;
+    font-family: "InclusiveSans", sans-serif;
+}
+.layout{
+    display: grid;
+    grid-template:
+        "header"
+        "nav"
+        "main"
+        "footer";
+    
+}
+header{
+    height: 9vh;    
+    background-color: #14213d;
+    grid-area: header;
+    color: aliceblue;
+    text-align: center;
+    font-size: 7vh;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav{
+    grid-area: nav;
+    height: 7vh;    
+    background-color: #0e3057;
+    color: aliceblue;
+    font-size:  4vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+    align-items: center;
+}
+main{
+    height: 80vh;
+    background-color: #e5e5e5;
+    grid-area: main;
+    color: black;
+    font-size: 40%;
+    overflow-y: auto;
+    padding: 14vh;
+}
+footer{
+    height: 4vh;
+    background-color: #14213d;
+    grid-area: footer;
+    color: aliceblue;
+    text-align: center;
+    font-size: 2.8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+.powitanie{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.powitanie h1{
+    font-size: 9vh;
+}
+.powitanie p{
+    font-size: 2.5vh;
+}
+
+button{
+    border-radius: 7px;
+    box-shadow: 0 0 7px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+    header {
+        font-size: 8vw;
+    }
+    nav {
+        font-size: 5vw;
+    }
+    main {
+        font-size: 3.5vw;
+        padding: 5%;
+    }
+    footer {
+        font-size: 3vw;
+    }
+    button {
+        width: 80%;
+        font-size: 4vw;
+    }
+}
