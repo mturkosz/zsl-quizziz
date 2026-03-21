@@ -279,10 +279,4 @@ input[type=number]::-webkit-inner-spin-button {
     .zakres button{
         height: 90%;
     }
-    #okno-ustawien{
-        width: 95vw;
-    }
-    #slajdy-ustawien{
-        width: 95vw;
-    }
 }
