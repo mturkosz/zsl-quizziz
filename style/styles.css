@@ -39,6 +39,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: sticky;
 }
 nav{
     grid-area: nav;
@@ -52,6 +53,7 @@ nav{
     box-shadow: 0 2px 15px rgba(0,0,0,0.5);
     z-index: 10;
     align-items: center;
+    position: sticky;
 }
 main{
     height: 80vh;
