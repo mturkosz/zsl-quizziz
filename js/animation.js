@@ -1,9 +1,11 @@
-console.log("JS działa!");
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.querySelector('.transition-overlay');
     const links = document.querySelectorAll('a');
 
+    console.log("JS działa!");
+    
     links.forEach(link => {
         const href = link.getAttribute('href');
         if(href && !href.startsWith('#') && !href.startsWith('mailto:')) {
