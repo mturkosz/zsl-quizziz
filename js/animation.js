@@ -1,27 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const overlay = document.querySelector('.transition-overlay');
-    const links = document.querySelectorAll('a');
+const swup = new Swup();
 
-    links.forEach(link => {
-        const href = link.getAttribute('href');
-        if(href && !href.startsWith('#') && !href.startsWith('mailto:')) {
-            link.addEventListener('click', e => {
-                e.preventDefault();
+const overlay = document.querySelector('.transition-overlay');
 
-                // od razu aktywujemy transform
-                overlay.classList.add('active');
+// WYJŚCIE ZE STRONY
+swup.hooks.on('visit:start', () => {
+    overlay.classList.add('active');
+});
 
-                // przejście po animacji
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 500); // czas taki jak w transition
-            });
-        }
-    });
-
-    // opcjonalna animacja startowa przy wejściu na stronę
+// WEJŚCIE NA NOWĄ STRONĘ
+swup.hooks.on('content:replace', () => {
     setTimeout(() => {
-        overlay.classList.add('active');
-        setTimeout(() => overlay.classList.remove('active'), 500);
-    }, 100);
+        overlay.classList.remove('active');
+    }, 300);
 });
