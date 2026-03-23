@@ -104,18 +104,41 @@ button{
 .transition-overlay {
     position: fixed;
     top: 50%;
-    left: 50%;
-    width: 100%;       /* pełna szerokość do skalowania */
-    height: 4px;       /* startowa linia */
-    background-color: #111;
-    transform: translate(-50%, -50%) scaleX(0) scaleY(1); /* startowa szerokość = 0 */
+    left: 0;
+    width: 100%;
+    height: 4px;
+
+    background: #111;
+
+    transform: scaleX(0);
     transform-origin: center;
-    transition: transform 0.5s ease-in-out;
+
+    transition: transform 0.3s ease-out;
     z-index: 9999;
 }
+
 .transition-overlay.active {
-    transform: translate(-50%, -50%) scaleX(100vw) scaleY(100vh); 
-    /* scaleY 50x = wypełnia ekran w pionie (dostosuj do swojego ekranu) */
+    transform: scaleX(1);
+}
+
+/* DRUGA FAZA */
+.transition-overlay.expand {
+    top: 0;
+    height: 100%;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: transform 0.4s ease-in-out;
+}
+
+html.is-changing #swup {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.4s;
+}
+
+html.is-animating #swup {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @media (max-width: 768px) {
