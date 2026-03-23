@@ -101,16 +101,6 @@ button{
     box-shadow: 0 0 7px rgba(0,0,0,0.5);
 }
 
-.transition-overlay {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(#113966, #14213d);
-    transform: scaleY(0);
-    transform-origin: left; 
-    z-index: 9999;
-    pointer-events: none;
-}
-
 @media (max-width: 768px) {
     header {
         font-size: 8vw;
