@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if(href && !href.startsWith('#') && !href.startsWith('mailto:')) {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-
-                overlay.classList.add('active'); // start animacji
+                requestAnimationFrame(() => {
+                    overlay.classList.add('active');
+                });
 
                 setTimeout(() => {
                     window.location.href = href;
