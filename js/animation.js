@@ -1,30 +1,35 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.querySelector('.transition-overlay');
     const links = document.querySelectorAll('a');
 
-    console.log("JS działa!");
-    
+    // funkcja uruchamia animację overlay
+    function animateOverlay(callback) {
+        overlay.classList.add('active');
+
+        // czas dopasowany do CSS (width 0.4s, height 0.4s z opóźnieniem)
+        setTimeout(() => {
+            overlay.classList.remove('active'); // overlay znika po animacji
+            if (callback) callback();
+        }, 800);
+    }
+
+    // przechwycenie kliknięcia wszystkich linków
     links.forEach(link => {
         const href = link.getAttribute('href');
-        if(href && !href.startsWith('#') && !href.startsWith('mailto:')) {
+        if (href && !href.startsWith('#') && !href.startsWith('mailto:')) {
             link.addEventListener('click', e => {
-                e.preventDefault();
+                e.preventDefault(); // blokujemy natychmiastowe przejście
 
-                // uruchamiamy animację overlay po renderze
-                requestAnimationFrame(() => {
-                    overlay.classList.add('active');
+                animateOverlay(() => {
+                    window.location.href = href; // przechodzimy dopiero po animacji
                 });
-
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 800); // czas dopasowany do transition w CSS
             });
         }
     });
 
-    // reset overlay przy wejściu na stronę
-    overlay.style.width = '0%';
-    overlay.style.height = '4px';
+    // opcjonalna animacja przy wejściu na stronę (tylko dla efektu startowego)
+    // możesz usunąć, jeśli nie chcesz efektu przy samym ładowaniu strony
+    setTimeout(() => {
+        animateOverlay();
+    }, 100); // krótki delay, żeby przeglądarka namalowała początkową linię
 });
