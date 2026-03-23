@@ -8,14 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('click', e => {
                 e.preventDefault();
 
-                // overlay natychmiast aktywny
+                // od razu aktywujemy transform
                 overlay.classList.add('active');
 
-                // po animacji przechodzimy do nowej strony
+                // przejście po animacji
                 setTimeout(() => {
                     window.location.href = href;
-                }, 400); // czas taki jak w CSS transition
+                }, 500); // czas taki jak w transition
             });
         }
     });
+
+    // opcjonalna animacja startowa przy wejściu na stronę
+    setTimeout(() => {
+        overlay.classList.add('active');
+        setTimeout(() => overlay.classList.remove('active'), 500);
+    }, 100);
 });
