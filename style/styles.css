@@ -114,7 +114,7 @@ button{
     z-index: 9999;
 }
 .transition-overlay.active {
-    transform: translate(-50%, -50%) scaleX(1) scaleY(50); 
+    transform: translate(-50%, -50%) scaleX(100vw) scaleY(100vh); 
     /* scaleY 50x = wypełnia ekran w pionie (dostosuj do swojego ekranu) */
 }
 
