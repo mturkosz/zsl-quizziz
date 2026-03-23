@@ -1,3 +1,5 @@
+console.log("JS działa!");
+
 document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.querySelector('.transition-overlay');
     const links = document.querySelectorAll('a');
