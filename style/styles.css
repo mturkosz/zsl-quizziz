@@ -107,7 +107,7 @@ button{
     left: 50%;
     width: 0%;         /* startowa szerokość */
     height: 4px;       /* cienka linia startowa */
-    background-color: #111; 
+    background-color: radial-gradient(#14213d, #476eD9); 
     transform: translate(-50%, -50%) scaleY(1);
     transform-origin: center;
     transition: width 0.4s ease-out, height 0.4s ease-out 0.4s;
