@@ -4,7 +4,7 @@
     'position:fixed', 'inset:0', 'z-index:99999',
     'background:radial-gradient(ellipse at center, #1e3460 0%, #14213d 100%)',
     'pointer-events:none',
-    'transform:scaleX(0) scaleY(0)',
+    'transform:scaleX(1) scaleY(1)',
     'transform-origin:center center',
     'will-change:transform',
     'border-radius:3px'
@@ -51,10 +51,10 @@
     }).then(function () { busy = false; });
   });
 
+  // Page load: fullscreen â shrinks to nothing
   (async function () {
-    setInstant('scaleX(0.45) scaleY(0.03)');
-    await new Promise(r => setTimeout(r, 200));
-    await anim('scaleX(1) scaleY(1)', 500, 'cubic-bezier(0.2, 0, 0.2, 1)');
-    await anim('scaleX(0) scaleY(0)', 550, 'cubic-bezier(0.5, 0, 0.8, 1)');
+    setInstant('scaleX(1) scaleY(1)');
+    await new Promise(r => setTimeout(r, 100));
+    await anim('scaleX(0) scaleY(0)', 600, 'cubic-bezier(0.5, 0, 0.8, 1)');
   })();
 })();
