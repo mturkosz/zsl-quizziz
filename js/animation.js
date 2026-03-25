@@ -31,8 +31,6 @@
     busy = true;
 
     hideContent();
-
-    // Mark that the next page load came from a navigation
     try { sessionStorage.setItem('tv-nav', '1'); } catch(e) {}
 
     runAnim('tv-out', 700).then(function () {
@@ -40,25 +38,39 @@
     });
   });
 
-  var isNavigation = false;
-  try {
-    isNavigation = sessionStorage.getItem('tv-nav') === '1';
-    sessionStorage.removeItem('tv-nav');
-  } catch(e) {}
+  function init() {
+    var isNavigation = false;
+    try {
+      isNavigation = sessionStorage.getItem('tv-nav') === '1';
+      sessionStorage.removeItem('tv-nav');
+    } catch(e) {}
 
-  hideContent();
+    hideContent();
 
-  if (isNavigation) {
-    runAnim('tv-in', 700).then(function () {
-      showContent();
-      overlay.className = 'tv-overlay';
-      busy = false;
-    });
-  } else {
-    runAnim('tv-pageload', 900).then(function () {
-      showContent();
-      overlay.className = 'tv-overlay';
-      busy = false;
-    });
+    if (isNavigation) {
+      runAnim('tv-in', 900).then(function () {
+        showContent();
+        overlay.className = 'tv-overlay';
+        busy = false;
+      });
+    } else {
+      runAnim('tv-pageload', 900).then(function () {
+        showContent();
+        overlay.className = 'tv-overlay';
+        busy = false;
+      });
+    }
   }
+
+  // Handle bfcache restore (Chrome/Edge)
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      // Page restored from bfcache â reset and play tv-in
+      busy = false;
+      try { sessionStorage.setItem('tv-nav', '1'); } catch(e) {}
+      init();
+    }
+  });
+
+  init();
 })();
