@@ -54,18 +54,26 @@ button{
     .row_a{
         width: 90%;
         min-width: 0;
+        max-width: 100%;
         grid-column: 1 / -1;
         grid-row: auto;
         border-radius: 10px;
-        padding: 40px;
+        padding: 24px 16px;
+        gap: 1rem;
     }
     .row_a p{
-        font-size: 6vw; 
+        font-size: 6vw;
+        margin: 1vh;
     }
     .clik{
         font-size: 5vw;
+        width: 100%;
     }
     button{
-        height: 3rem;
+        height: auto;
+        min-height: 44px;
+        width: 80%;
+        font-size: 4vw;
+        padding: 10px;
     }
 }
