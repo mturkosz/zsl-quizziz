@@ -18,44 +18,43 @@
     document.body.classList.remove('tv-content-hidden');
   }
 
-  let busy = false;
+  var busy = false;
 
   document.addEventListener('click', function (e) {
-    const a = e.target.closest('a[href]');
+    var a = e.target.closest('a[href]');
     if (!a) return;
-    const href = a.getAttribute('href');
+    var href = a.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('javascript') || a.target === '_blank') return;
     if (href.includes('konkursFlagi1-quizz')) return;
     e.preventDefault();
     if (busy) return;
     busy = true;
 
-    // 1. Hide content immediately
     hideContent();
 
-    // 2. Squish out
-    runAnim('tv-out', 700).then(function () {
+    // Mark that the next page load came from a navigation
+    try { sessionStorage.setItem('tv-nav', '1'); } catch(e) {}
 
-      // 3. Navigate â new page loads hidden
+    runAnim('tv-out', 700).then(function () {
       window.location.href = href;
     });
   });
 
-  const navEntry = performance.getEntriesByType('navigation')[0];
-  const isNavigation = navEntry && navEntry.type === 'navigate';
+  var isNavigation = false;
+  try {
+    isNavigation = sessionStorage.getItem('tv-nav') === '1';
+    sessionStorage.removeItem('tv-nav');
+  } catch(e) {}
 
-  // Hide content straight away
   hideContent();
 
   if (isNavigation) {
-    // Came via link â grow in, then reveal content when fully covering screen
     runAnim('tv-in', 700).then(function () {
       showContent();
       overlay.className = 'tv-overlay';
       busy = false;
     });
   } else {
-    // Fresh load â shrink from full, then reveal
     runAnim('tv-pageload', 900).then(function () {
       showContent();
       overlay.className = 'tv-overlay';
