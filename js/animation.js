@@ -1,10 +1,13 @@
 (function () {
-  const overlay = document.createElement('div');
+  var overlay = document.createElement('div');
   overlay.className = 'tv-overlay';
   document.body.appendChild(overlay);
 
   function runAnim(cls, duration) {
     return new Promise(function (resolve) {
+      // Force reflow so animation restarts cleanly
+      overlay.className = 'tv-overlay';
+      void overlay.offsetWidth;
       overlay.className = 'tv-overlay ' + cls;
       setTimeout(resolve, duration);
     });
@@ -30,6 +33,7 @@
     if (busy) return;
     busy = true;
 
+    // Hide content immediately on click
     hideContent();
     try { sessionStorage.setItem('tv-nav', '1'); } catch(ex) {}
 
@@ -45,29 +49,25 @@
       sessionStorage.removeItem('tv-nav');
     } catch(ex) {}
 
-    overlay.className = 'tv-overlay';
-    void overlay.offsetWidth;
-
     if (isNavigation) {
-      // tv-in: line → fullscreen → fade out
-      // Show content at 825ms when overlay fully covers screen
-      runAnim('tv-in', 1100).then(function () {
+      // Keep content hidden, play tv-in (line → full → fade)
+      // Reveal content at 80% of 1200ms = 960ms when overlay fully covers screen
+      hideContent();
+      runAnim('tv-in', 1200).then(function () {
         overlay.className = 'tv-overlay';
         busy = false;
       });
       setTimeout(function () {
         showContent();
-      }, 825);
+      }, 960);
     } else {
-      // tv-pageload: thin line → grows to full → shrinks away
-      // Show content at 440ms (40% of 1100ms) when overlay reaches fullscreen
-      runAnim('tv-pageload', 1100).then(function () {
+      // First load: white screen → show content → play tv-pageload (line → full → fade)
+      // Show content immediately so white screen is visible under the animation
+      showContent();
+      runAnim('tv-pageload', 1400).then(function () {
         overlay.className = 'tv-overlay';
         busy = false;
       });
-      setTimeout(function () {
-        showContent();
-      }, 440);
     }
   }
 
