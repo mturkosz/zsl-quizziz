@@ -29,8 +29,14 @@
     e.preventDefault();
     if (busy) return;
     busy = true;
+
+    // 1. Hide content immediately
     hideContent();
+
+    // 2. Squish out
     runAnim('tv-out', 700).then(function () {
+
+      // 3. Navigate â new page loads hidden
       window.location.href = href;
     });
   });
@@ -38,18 +44,21 @@
   const navEntry = performance.getEntriesByType('navigation')[0];
   const isNavigation = navEntry && navEntry.type === 'navigate';
 
+  // Hide content straight away
   hideContent();
 
   if (isNavigation) {
+    // Came via link â grow in, then reveal content when fully covering screen
     runAnim('tv-in', 700).then(function () {
-      overlay.className = 'tv-overlay';
       showContent();
+      overlay.className = 'tv-overlay';
       busy = false;
     });
   } else {
+    // Fresh load â shrink from full, then reveal
     runAnim('tv-pageload', 900).then(function () {
-      overlay.className = 'tv-overlay';
       showContent();
+      overlay.className = 'tv-overlay';
       busy = false;
     });
   }
