@@ -5,7 +5,6 @@
 
   function runAnim(cls, duration) {
     return new Promise(function (resolve) {
-      // Force reflow so animation restarts cleanly
       overlay.className = 'tv-overlay';
       void overlay.offsetWidth;
       overlay.className = 'tv-overlay ' + cls;
@@ -33,7 +32,6 @@
     if (busy) return;
     busy = true;
 
-    // Hide content immediately on click
     hideContent();
     try { sessionStorage.setItem('tv-nav', '1'); } catch(ex) {}
 
@@ -49,26 +47,16 @@
       sessionStorage.removeItem('tv-nav');
     } catch(ex) {}
 
-    if (isNavigation) {
-      // Keep content hidden, play tv-in (line → full → fade)
-      // Reveal content at 80% of 1200ms = 960ms when overlay fully covers screen
-      hideContent();
-      runAnim('tv-in', 1200).then(function () {
-        overlay.className = 'tv-overlay';
-        busy = false;
-      });
-      setTimeout(function () {
-        showContent();
-      }, 960);
-    } else {
-      // First load: white screen → show content → play tv-pageload (line → full → fade)
-      // Show content immediately so white screen is visible under the animation
+    // Both first load and navigation use tv-in
+    // Keep content hidden, show it at 80% of 1200ms = 960ms when overlay is fullscreen
+    hideContent();
+    runAnim('tv-in', 1200).then(function () {
+      overlay.className = 'tv-overlay';
+      busy = false;
+    });
+    setTimeout(function () {
       showContent();
-      runAnim('tv-pageload', 1400).then(function () {
-        overlay.className = 'tv-overlay';
-        busy = false;
-      });
-    }
+    }, 960);
   }
 
   window.addEventListener('pageshow', function (e) {
