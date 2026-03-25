@@ -20,6 +20,7 @@
 
   var busy = false;
 
+  // Outgoing click handler
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href]');
     if (!a) return;
@@ -31,46 +32,44 @@
     busy = true;
 
     hideContent();
-    try { sessionStorage.setItem('tv-nav', '1'); } catch(e) {}
+    try { sessionStorage.setItem('tv-nav', '1'); } catch(ex) {}
 
     runAnim('tv-out', 700).then(function () {
-      window.location.href = href;
+      window.location.assign(href);
     });
   });
 
-  function init() {
+  function playEntrance() {
     var isNavigation = false;
     try {
       isNavigation = sessionStorage.getItem('tv-nav') === '1';
       sessionStorage.removeItem('tv-nav');
-    } catch(e) {}
+    } catch(ex) {}
 
     hideContent();
 
-    if (isNavigation) {
-      runAnim('tv-in', 900).then(function () {
-        showContent();
-        overlay.className = 'tv-overlay';
-        busy = false;
-      });
-    } else {
-      runAnim('tv-pageload', 900).then(function () {
-        showContent();
-        overlay.className = 'tv-overlay';
-        busy = false;
-      });
-    }
+    var animCls = isNavigation ? 'tv-in' : 'tv-pageload';
+    var dur = 900;
+
+    // Force a reflow so the class change is picked up fresh
+    overlay.className = 'tv-overlay';
+    void overlay.offsetWidth;
+
+    runAnim(animCls, dur).then(function () {
+      showContent();
+      overlay.className = 'tv-overlay';
+      busy = false;
+    });
   }
 
-  // Handle bfcache restore (Chrome/Edge)
+  // pageshow fires on every navigation including bfcache in ALL browsers
   window.addEventListener('pageshow', function (e) {
+    busy = false;
     if (e.persisted) {
-      // Page restored from bfcache â reset and play tv-in
-      busy = false;
-      try { sessionStorage.setItem('tv-nav', '1'); } catch(e) {}
-      init();
+      // bfcache restore â mark as navigation so tv-in plays
+      try { sessionStorage.setItem('tv-nav', '1'); } catch(ex) {}
     }
+    playEntrance();
   });
 
-  init();
 })();
