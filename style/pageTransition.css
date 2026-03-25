@@ -62,7 +62,6 @@ main{
     font-size: 40%;
     overflow-y: auto;
     padding: 14vh;
-    padding-top: 4vh;
 }
 footer{
     height: 4vh;
