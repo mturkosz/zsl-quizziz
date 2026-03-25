@@ -20,7 +20,6 @@
 
   var busy = false;
 
-  // Outgoing click handler
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href]');
     if (!a) return;
@@ -48,25 +47,32 @@
 
     hideContent();
 
-    var animCls = isNavigation ? 'tv-in' : 'tv-pageload';
-    var dur = 900;
-
-    // Force a reflow so the class change is picked up fresh
     overlay.className = 'tv-overlay';
     void overlay.offsetWidth;
 
-    runAnim(animCls, dur).then(function () {
+    if (isNavigation) {
+      // tv-in: grows to full (covers screen) â show content â overlay fades out
+      // Show content at 75% of 900ms = ~675ms, when overlay fully covers screen
+      runAnim('tv-in', 900).then(function () {
+        overlay.className = 'tv-overlay';
+        busy = false;
+      });
+      setTimeout(function () {
+        showContent();
+      }, 675);
+    } else {
+      // tv-pageload: content already visible, just shrink away
       showContent();
-      overlay.className = 'tv-overlay';
-      busy = false;
-    });
+      runAnim('tv-pageload', 900).then(function () {
+        overlay.className = 'tv-overlay';
+        busy = false;
+      });
+    }
   }
 
-  // pageshow fires on every navigation including bfcache in ALL browsers
   window.addEventListener('pageshow', function (e) {
     busy = false;
     if (e.persisted) {
-      // bfcache restore â mark as navigation so tv-in plays
       try { sessionStorage.setItem('tv-nav', '1'); } catch(ex) {}
     }
     playEntrance();
