@@ -47,33 +47,46 @@ button{
 }
 
 @media (max-width: 768px) {
-    .menu{
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
+    .menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        min-height: 80vh;
     }
-    .row_a{
-        width: 90%;
+    .row_a {
+        width: 100%;
         min-width: 0;
         max-width: 100%;
-        grid-column: 1 / -1;
-        grid-row: auto;
+        grid-column: unset;
+        grid-row: unset;
         border-radius: 10px;
-        padding: 24px 16px;
-        gap: 1rem;
+        padding: 24px 20px;
+        gap: 1.2rem;
     }
-    .row_a p{
-        font-size: 6vw;
-        margin: 1vh;
+    .row_a p {
+        font-size: 7vw;
+        margin: 0;
     }
-    .clik{
+    .clik {
         font-size: 5vw;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
     }
-    button{
+    .clik br {
+        display: none;
+    }
+    button {
         height: auto;
         min-height: 44px;
-        width: 80%;
-        font-size: 4vw;
-        padding: 10px;
+        width: 90%;
+        font-size: 4.5vw;
+        padding: 10px 16px;
+        white-space: normal;
+        line-height: 1.3;
     }
 }
