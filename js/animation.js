@@ -35,7 +35,7 @@
     hideContent();
     try { sessionStorage.setItem('tv-nav', '1'); } catch(ex) {}
 
-    runAnim('tv-out', 700).then(function () {
+    runAnim('tv-out', 900).then(function () {
       window.location.assign(href);
     });
   });
@@ -47,16 +47,18 @@
       sessionStorage.removeItem('tv-nav');
     } catch(ex) {}
 
-    // Both first load and navigation use tv-in
-    // Keep content hidden, show it at 80% of 1200ms = 960ms when overlay is fullscreen
     hideContent();
-    runAnim('tv-in', 1200).then(function () {
+
+    // tv-in total: 1600ms
+    // overlay reaches 100% width+height at 80% = 1280ms
+    // show content slightly after — at 1380ms to be safe
+    runAnim('tv-in', 1600).then(function () {
       overlay.className = 'tv-overlay';
       busy = false;
     });
     setTimeout(function () {
       showContent();
-    }, 960);
+    }, 1380);
   }
 
   window.addEventListener('pageshow', function (e) {
