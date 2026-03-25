@@ -45,28 +45,29 @@
       sessionStorage.removeItem('tv-nav');
     } catch(ex) {}
 
-    hideContent();
-
     overlay.className = 'tv-overlay';
     void overlay.offsetWidth;
 
     if (isNavigation) {
-      // tv-in: grows to full (covers screen) â show content â overlay fades out
-      // Show content at 75% of 900ms = ~675ms, when overlay fully covers screen
-      runAnim('tv-in', 900).then(function () {
+      // tv-in: line → fullscreen → fade out
+      // Show content at 825ms when overlay fully covers screen
+      runAnim('tv-in', 1100).then(function () {
         overlay.className = 'tv-overlay';
         busy = false;
       });
       setTimeout(function () {
         showContent();
-      }, 675);
+      }, 825);
     } else {
-      // tv-pageload: content already visible, just shrink away
-      showContent();
-      runAnim('tv-pageload', 900).then(function () {
+      // tv-pageload: thin line → grows to full → shrinks away
+      // Show content at 440ms (40% of 1100ms) when overlay reaches fullscreen
+      runAnim('tv-pageload', 1100).then(function () {
         overlay.className = 'tv-overlay';
         busy = false;
       });
+      setTimeout(function () {
+        showContent();
+      }, 440);
     }
   }
 
