@@ -214,6 +214,7 @@ h2{
     display: flex;
     justify-content: center;
     align-items: center; 
+    flex-wrap: wrap;
 }
 
 .ilosc input{
@@ -223,6 +224,7 @@ h2{
     border-radius: 1vh;
     padding: 0.85vh;
     font-size: 2vh;
+    flex-shrink: 0;
 }
 
 #czas-na-flage-inp{
