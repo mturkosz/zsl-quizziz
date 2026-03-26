@@ -25,7 +25,7 @@ const countries = {
     "bo":"Boliwia","br":"Brazylia","bs":"Bahamy","bt":"Bhutan","bw":"Botswana","by":"Białoruś",
     "bz":"Belize","ca":"Kanada","cd":"Demokratyczna Republika Konga","cf":"Republika Środkowoafrykańska",
     "cg":"Kongo","ch":"Szwajcaria","ci":"Wybrzeże Kości Słoniowej","cl":"Chile","cm":"Kamerun","cn":"Chiny",
-    "co":"Kolumbia","cr":"Kostaryka","cu":"Kuba","cv":"Republika Zielonego Przylądka","cy":"Cypr",
+    "co":"Kolumbia","cr":"Kostaryka",   "cu":"Kuba","cv":"Republika Zielonego Przylądka","cy":"Cypr",
     "cz":"Czechy","de":"Niemcy","dj":"Dżibuti","dk":"Dania","dm":"Dominika","do":"Dominikana",
     "dz":"Algieria","ec":"Ekwador","ee":"Estonia","eg":"Egipt","er":"Erytrea","es":"Hiszpania",
     "et":"Etiopia","fi":"Finlandia","fj":"Fidżi","fm":"Mikronezja","fr":"Francja","ga":"Gabon",
@@ -72,6 +72,21 @@ const dependentTerritories = {
   "um": "Dalekie Wyspy Mniejsze Stanów Zjednoczonych","vg": "Brytyjskie Wyspy Dziewicze",
   "vi": "Wyspy Dziewicze Stanów Zjednoczonych","wf": "Wallis i Futuna","yt": "Majotta"
 };
+
+const skrotyPanstw = {
+    "drk": "cd",      // Demokratyczna Republika Konga
+    "rś": "cf",      // Republika Środkowoafrykańska  
+    "usa": "us",      // Stany Zjednoczone
+    "zea": "ae",      // Zjednoczone Emiraty Arabskie
+    "uk": "gb",       // Wielka Brytania
+    "wks": "ci",      // Wybrzeże Kości Słoniowej
+    "korea poł": "kr", // Korea Południowa
+    "korea pół": "kp", // Korea Północna
+    "rpa": "za",      // Republika Południowej Afryki
+    "rzp": "cv",      // Republika Zielonego Przylądka
+};
+
+
 
 const konkursowy = sessionStorage.getItem("WyborUstawienQuizu") === "ust-konkurs";
 sessionStorage.removeItem("WyborUstawienQuizu");
@@ -165,7 +180,6 @@ function showNextFlag() {
 }
 
 function checkAnswer() {
-
     clearInterval(timer);
 
     const code = selectedFlags[currentIndex];
@@ -175,21 +189,30 @@ function checkAnswer() {
 
     if (!userAnswer) return;
 
+    // 1. Sprawdzanie po pełnej nazwie (jak dotychczas)
     if (userAnswer === normalize(correctAnswer)) {
-
         correctCount++;
-
         resultMessage.textContent = konkursowy ? "✔" : "✔ Poprawnie!";
-
-    } else {
-
+    } 
+    // 2. Nowe: sprawdzanie po konkretnym skrócie
+    else if (skrotyPanstw[userAnswer]) {
+        if (skrotyPanstw[userAnswer] === code) {
+            correctCount++;
+            resultMessage.textContent = konkursowy ? "✔" : `✔ Poprawnie! (${correctAnswer})`;
+        } else {
+            resultMessage.textContent = konkursowy
+                ? "✖"
+                : `✖ Błędnie! Poprawna odpowiedź: ${correctAnswer}`;
+        }
+    } 
+    // Błędna odpowiedź
+    else {
         resultMessage.textContent = konkursowy
             ? "✖"
             : `✖ Błędnie! Poprawna odpowiedź: ${correctAnswer}`;
     }
 
     currentIndex++;
-
     setTimeout(showNextFlag, 1000);
 }
 
