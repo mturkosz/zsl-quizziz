@@ -16,12 +16,12 @@ PrzyciskiUst = document.querySelector("#przyciski-ustawien2");
 const ustIlosc = document.querySelector(".ilosc label");
 
 
-let quizSettings = {          // dodane
-    zakres: null,             //
-    czasNaFlage: null,        //
-    ilosc: null               //
+let quizSettings = {
+    zakres: null,
+    czasNaFlage: null,
+    ilosc: null,
+    maxIlosc: null      // NOWE
 };
-
 
 
 UstWlsBut.addEventListener("click", () =>{
@@ -132,11 +132,25 @@ ToggleButton.addEventListener("click", () =>{
 })
 
 
-const iloscInput = document.querySelector(".ilosc input"); // dodane
-iloscInput.addEventListener("input", () => {               //
-    quizSettings.ilosc = parseInt(iloscInput.value);       //
-    CheckStart();                                          //
-});                                                        //
+const iloscInput = document.querySelector(".ilosc input");
+iloscInput.addEventListener("input", () => {
+    let val = parseInt(iloscInput.value, 10);
+
+    if (isNaN(val) || val < 1) {
+        quizSettings.ilosc = null;
+    } else {
+        // jeśli znamy max dla zakresu – przytnij i zablokuj start
+        if (quizSettings.maxIlosc && val > quizSettings.maxIlosc) {
+            val = quizSettings.maxIlosc;
+            iloscInput.value = quizSettings.maxIlosc;
+            // Ewentualnie komunikat np. pod inputem:
+            // alert(`Maksymalna ilość dla wybranego zakresu to ${quizSettings.maxIlosc}.`);
+        }
+        quizSettings.ilosc = val;
+    }
+
+    CheckStart();
+});                                                       //
 
 
 document.querySelectorAll('.zakres button').forEach(btn => {
@@ -145,12 +159,19 @@ document.querySelectorAll('.zakres button').forEach(btn => {
         this.classList.add('active');
         ustIlosc.innerText = this.dataset.text;
         
-        quizSettings.zakres = this.name;                    // dodane
-        quizSettings.ilosc = parseInt(this.dataset.ilosc);  //
-        CheckStart();                                       //
+        quizSettings.zakres = this.name;
+        quizSettings.ilosc = parseInt(this.dataset.ilosc);
+        quizSettings.maxIlosc = parseInt(this.dataset.ilosc);   // NOWE
+
+        // ustaw też label z maxem (żeby zgadzało się z zakresem)
+        const iloscLabel = document.querySelector(".ilosc label");
+        if (iloscLabel) {
+            iloscLabel.textContent = `Ilość (max. ${this.dataset.ilosc}): `;
+        }
+
+        CheckStart();
     });
 });
-
 
 
 document.querySelectorAll('#slide1 button').forEach(btn => {
@@ -181,14 +202,19 @@ document.querySelectorAll('#slide1 button').forEach(btn => {
     });
 });
 
-function CheckStart() {                              // dodane                                             
-    const iloscVal = parseInt(iloscInput.value, 10); //
-    if (quizSettings.zakres && iloscVal >= 1) {      //
-        StartButton.classList.add("active");         //
-    } else {                                         //
-        StartButton.classList.remove("active");      //
-    }                                                //
-}                                                    //
+function CheckStart() {
+    const iloscVal = parseInt(iloscInput.value, 10);
+
+    const zakresOk = !!quizSettings.zakres;
+    const iloscOk = !isNaN(iloscVal) && iloscVal >= 1 &&
+        (!quizSettings.maxIlosc || iloscVal <= quizSettings.maxIlosc);
+
+    if (zakresOk && iloscOk) {
+        StartButton.classList.add("active");
+    } else {
+        StartButton.classList.remove("active");
+    }
+}                                                  //
 
 let czasNaFlage = null;                          // dodane
 if(czasInput && czasInput.value.trim() !== "") { //
